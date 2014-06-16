@@ -1,0 +1,33 @@
+Neutrino effects are included in the bbn code via energy loss terms in various processes. These include pair production, plasma, photoneutrino, brehmsstrahlung, and recombination.
+
+itoh 1996 contains parametrized fits to the neutrino energy loss
+for photoneutrino processes, the references are:
+Munakata, et al. 1985
+Itoh 1989
+These references get their analytical expression for energy loss from electroweak calculations in PRD vol. 6 no. 4, Aug. 15, 1972 by Dicus.
+
+To do integration with infinite bounds numerically, use logger quadrature method. Richard Cyburt has an integration code in fortran for doing this. It's on the document server!
+
+Figure out if the nu energy loss rate can give us a modification of CMB temperature or the relic neutrino temperature.
+
+The neutrino energy loss rate is computed in subroutine sneut5:
+! input:
+! temp = temperature
+! den  = density
+! abar = mean atomic weight
+! zbar = mean charge
+
+! output:
+! snu    = total neutrino loss rate in erg/g/sec
+! dsnudt = derivative of snu with temperature
+! dsnudd = derivative of snu with density
+! dsnuda = derivative of snu with abar
+! dsnudz = derivative of snu with zbar
+ 
+sneut5 is called on the following lines: 417, 1811, 3943
+
+l.417 is in the subroutine bigbang, which sets up the odes for bbn. It is passed to netint by the burner subroutine. netint integrates the odes and bigbang is given to it as derivs, the name of the routine containing the odes. derivs is called in netint and passed to the integrator for a step. Strangely, sneut is set to zero right after this function call.
+
+l.1811 is in the subroutine dbigbang, which sets up the dense big bang jacobian matrix dfdy(i,j). It calls sneut5 but then set all its return values to 0 before computing the dfdy elements that depend upon it.
+
+l.3943 is in the subroutine sbigbang, which sets up the sparse big bang jacobian matrix dfdy(i,j). It calls sneut5 but then sets all its return values to 0 before computing the dfdy elements depending on it.
