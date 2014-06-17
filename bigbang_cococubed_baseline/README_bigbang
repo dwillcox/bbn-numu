@@ -1,0 +1,218 @@
+A simple compile and link should produce an executable.
+
+% ifort public_bigbang.f90 -o public_bigbang.exe
+
+
+the code uses cgs units. 
+here is an example run 
+
+
+% drive_bigbang.exe
+ 
+ bigbang parameters - wmap 2005 values:=
+ 
+ eta= 6.230E-10 
+ number of neutrino families= 3.000E+00 
+ hubble constant= 7.050E+01 
+ present cmb temperature= 2.725E+00 
+ 
+ <cr> if ok, enter 0 to enter values, enter 1 to exit program =>
+
+ 
+ give the ending time in seconds (suggest 1e6) =>
+1.0e6
+  
+ give output root name, <cr> for default "foo_"=>
+
+ 
+ time_start= 0.000E+00 time_end= 1.000E+06 
+ tin= 1.000E+11 din= 2.099E+01 bpres= 6.932E+29 ein= 9.912E+28 
+          16  largest mass fractions
+ prot = 5.375E-01 
+ neut = 4.625E-01 
+ 1-sum= 0.000E+00 
+ abar= 1.000E+00 zbar= 5.375E-01 ye= 5.375E-01 
+ 
+ 
+ ionbeg=    1 ionend=   16 ionmax=   16 neqs=   19 nrates=  106
+ 
+ 
+ starting integration
+ 
+      1  time 0.0000E+00 dt(time ) 0.0000E+00 prot  5.375E-01 neut  4.625E-01 c14   1.400E-29 temp 1.00E+11 den 2.10E+01 enuc  1.02E+24 ye 5.37E-01 sum  0.00E+00
+      2  time 1.0000E-16 dt(h2   ) 1.0000E-16 prot  5.375E-01 neut  4.625E-01 h2    2.833E-12 temp 1.00E+11 den 2.10E+01 enuc  1.26E+22 ye 5.37E-01 sum  0.00E+00
+      3  time 1.1000E-15 dt(h2   ) 1.0000E-15 prot  5.375E-01 neut  4.625E-01 h2    2.868E-12 temp 1.00E+11 den 2.10E+01 enuc  1.25E+19 ye 5.37E-01 sum  2.22E-16
+      4  time 1.1100E-14 dt(h3   ) 1.0000E-14 prot  5.375E-01 neut  4.625E-01 h2    2.868E-12 temp 1.00E+11 den 2.10E+01 enuc  8.45E+18 ye 5.37E-01 sum  0.00E+00
+      5  time 1.1110E-13 dt(h3   ) 1.0000E-13 prot  5.375E-01 neut  4.625E-01 h2    2.868E-12 temp 1.00E+11 den 2.10E+01 enuc  8.45E+18 ye 5.37E-01 sum  0.00E+00
+      6  time 1.1111E-12 dt(h3   ) 1.0000E-12 prot  5.375E-01 neut  4.625E-01 h2    2.868E-12 temp 1.00E+11 den 2.10E+01 enuc  8.45E+18 ye 5.37E-01 sum -4.44E-16
+      7  time 1.1111E-11 dt(h3   ) 1.0000E-11 prot  5.375E-01 neut  4.625E-01 h2    2.868E-12 temp 1.00E+11 den 2.10E+01 enuc  8.45E+18 ye 5.37E-01 sum -4.44E-16
+      8  time 1.1111E-10 dt(neut ) 1.0000E-10 prot  5.375E-01 neut  4.625E-01 h2    2.868E-12 temp 1.00E+11 den 2.10E+01 enuc  8.45E+18 ye 5.37E-01 sum -4.44E-16
+      9  time 1.1111E-09 dt(neut ) 1.0000E-09 prot  5.375E-01 neut  4.625E-01 h2    2.868E-12 temp 1.00E+11 den 2.10E+01 enuc  8.45E+18 ye 5.37E-01 sum -4.44E-16
+     10  time 1.1111E-08 dt(neut ) 1.0000E-08 prot  5.375E-01 neut  4.625E-01 h2    2.868E-12 temp 1.00E+11 den 2.10E+01 enuc  8.44E+18 ye 5.37E-01 sum -6.66E-16
+     11  time 1.1111E-07 dt(neut ) 1.0000E-07 prot  5.375E-01 neut  4.625E-01 h2    2.868E-12 temp 1.00E+11 den 2.10E+01 enuc  8.39E+18 ye 5.37E-01 sum -6.66E-16
+     12  time 1.1111E-06 dt(neut ) 1.0000E-06 prot  5.375E-01 neut  4.625E-01 h2    2.868E-12 temp 1.00E+11 den 2.10E+01 enuc  7.91E+18 ye 5.37E-01 sum -6.66E-16
+     13  time 1.1111E-05 dt(neut ) 1.0000E-05 prot  5.375E-01 neut  4.625E-01 h2    2.866E-12 temp 9.99E+10 den 2.10E+01 enuc  4.77E+18 ye 5.38E-01 sum -4.44E-16
+     14  time 1.1111E-04 dt(neut ) 1.0000E-04 prot  5.377E-01 neut  4.623E-01 h2    2.848E-12 temp 9.94E+10 den 2.06E+01 enuc  2.36E+18 ye 5.38E-01 sum -6.66E-16
+     15  time 8.6225E-04 dt(den  ) 7.5114E-04 prot  5.391E-01 neut  4.609E-01 h2    2.723E-12 temp 9.59E+10 den 1.85E+01 enuc  2.38E+18 ye 5.39E-01 sum  1.38E-14
+     16  time 4.7852E-03 dt(neut ) 3.9229E-03 prot  5.457E-01 neut  4.543E-01 h2    2.253E-12 temp 8.22E+10 den 1.16E+01 enuc  8.92E+19 ye 5.46E-01 sum  1.72E-14
+     17  time 1.3681E-02 dt(neut ) 8.8959E-03 prot  5.579E-01 neut  4.421E-01 h2    1.712E-12 temp 6.49E+10 den 5.73E+00 enuc -3.07E+20 ye 5.58E-01 sum  1.47E-14
+     18  time 2.0198E-02 dt(neut ) 6.5172E-03 prot  5.653E-01 neut  4.347E-01 h2    1.495E-12 temp 5.74E+10 den 3.98E+00 enuc -3.87E+19 ye 5.65E-01 sum  1.37E-14
+     19  time 3.7763E-02 dt(neut ) 1.7565E-02 prot  5.817E-01 neut  4.183E-01 h2    1.179E-12 temp 4.57E+10 den 2.00E+00 enuc -5.46E+19 ye 5.82E-01 sum  1.23E-14
+     20  time 7.3706E-02 dt(neut ) 3.5943E-02 prot  6.066E-01 neut  3.934E-01 h2    9.108E-13 temp 3.45E+10 den 8.61E-01 enuc -2.54E+18 ye 6.07E-01 sum  1.29E-14
+     21  time 9.5100E-02 dt(neut ) 2.1394E-02 prot  6.183E-01 neut  3.817E-01 h2    8.310E-13 temp 3.08E+10 den 6.12E-01 enuc  1.37E+18 ye 6.18E-01 sum  1.22E-14
+     22  time 1.6656E-01 dt(neut ) 7.1464E-02 prot  6.485E-01 neut  3.515E-01 h2    6.980E-13 temp 2.38E+10 den 2.82E-01 enuc -6.71E+18 ye 6.49E-01 sum  1.55E-14
+     23  time 3.2329E-01 dt(neut ) 1.5672E-01 prot  6.903E-01 neut  3.097E-01 h2    6.078E-13 temp 1.73E+10 den 1.09E-01 enuc  9.83E+18 ye 6.90E-01 sum  1.70E-14
+     24  time 6.8173E-01 dt(den  ) 3.5845E-01 prot  7.388E-01 neut  2.612E-01 h2    6.134E-13 temp 1.20E+10 den 3.67E-02 enuc -9.31E+16 ye 7.39E-01 sum  1.71E-14
+     25  time 1.5650E+00 dt(den  ) 8.8331E-01 prot  7.836E-01 neut  2.164E-01 h2    8.627E-13 temp 8.03E+09 den 1.09E-02 enuc -1.05E+18 ye 7.84E-01 sum  1.44E-14
+     26  time 3.5248E+00 dt(den  ) 1.9598E+00 prot  8.119E-01 neut  1.881E-01 h2    2.013E-12 temp 5.43E+09 den 3.35E-03 enuc -1.51E+17 ye 8.12E-01 sum  1.44E-14
+     27  time 7.9435E+00 dt(h2   ) 4.4187E+00 prot  8.274E-01 neut  1.726E-01 h2    9.654E-12 temp 3.71E+09 den 1.07E-03 enuc -1.96E+16 ye 8.27E-01 sum  1.64E-14
+     28  time 1.6994E+01 dt(h2   ) 9.0507E+00 prot  8.355E-01 neut  1.645E-01 h2    9.394E-11 temp 2.63E+09 den 3.83E-04 enuc  2.36E+16 ye 8.36E-01 sum  1.67E-14
+     29  time 2.3104E+01 dt(h2   ) 6.1103E+00 prot  8.381E-01 neut  1.619E-01 h2    3.103E-10 temp 2.31E+09 den 2.57E-04 enuc -7.11E+15 ye 8.38E-01 sum  1.61E-14
+     30  time 3.0228E+01 dt(h2   ) 7.1232E+00 prot  8.403E-01 neut  1.597E-01 he4   1.329E-09 temp 2.06E+09 den 1.82E-04 enuc  1.31E+15 ye 8.40E-01 sum  1.53E-14
+     31  time 3.4095E+01 dt(h2   ) 3.8670E+00 prot  8.413E-01 neut  1.587E-01 he4   2.977E-09 temp 1.95E+09 den 1.57E-04 enuc -5.29E+13 ye 8.41E-01 sum  1.51E-14
+     32  time 3.6544E+01 dt(he4  ) 2.4494E+00 prot  8.419E-01 neut  1.581E-01 he4   4.409E-09 temp 1.90E+09 den 1.44E-04 enuc  1.61E+13 ye 8.42E-01 sum  1.53E-14
+     33  time 4.0719E+01 dt(h2   ) 4.1749E+00 prot  8.429E-01 neut  1.571E-01 he4   7.692E-09 temp 1.82E+09 den 1.25E-04 enuc  7.86E+14 ye 8.43E-01 sum  1.48E-14
+     34  time 4.2128E+01 dt(h2   ) 1.4086E+00 prot  8.432E-01 neut  1.568E-01 he4   9.087E-09 temp 1.79E+09 den 1.20E-04 enuc  2.36E+14 ye 8.43E-01 sum  1.49E-14
+     35  time 4.3372E+01 dt(he4  ) 1.2445E+00 prot  8.435E-01 neut  1.565E-01 he4   1.046E-08 temp 1.77E+09 den 1.16E-04 enuc  2.65E+14 ye 8.43E-01 sum  1.49E-14
+     36  time 4.6108E+01 dt(h2   ) 2.7363E+00 prot  8.441E-01 neut  1.559E-01 he4   1.401E-08 temp 1.72E+09 den 1.07E-04 enuc  2.03E+14 ye 8.44E-01 sum  1.45E-14
+     37  time 4.8072E+01 dt(he4  ) 1.9634E+00 prot  8.445E-01 neut  1.555E-01 he4   1.707E-08 temp 1.69E+09 den 1.02E-04 enuc  2.24E+14 ye 8.44E-01 sum  1.44E-14
+     38  time 5.0855E+01 dt(h2   ) 2.7828E+00 prot  8.450E-01 neut  1.550E-01 he4   2.228E-08 temp 1.66E+09 den 9.51E-05 enuc  2.71E+14 ye 8.45E-01 sum  1.48E-14
+     39  time 5.2731E+01 dt(he4  ) 1.8761E+00 prot  8.454E-01 neut  1.546E-01 he4   2.647E-08 temp 1.63E+09 den 9.09E-05 enuc  2.28E+14 ye 8.45E-01 sum  1.47E-14
+     40  time 5.5426E+01 dt(h2   ) 2.6950E+00 prot  8.459E-01 neut  1.541E-01 he4   3.361E-08 temp 1.60E+09 den 8.55E-05 enuc  2.45E+14 ye 8.46E-01 sum  1.43E-14
+     41  time 5.7196E+01 dt(he4  ) 1.7705E+00 prot  8.463E-01 neut  1.537E-01 he4   3.913E-08 temp 1.58E+09 den 8.22E-05 enuc  2.29E+14 ye 8.46E-01 sum  1.44E-14
+     42  time 6.0040E+01 dt(h2   ) 2.8437E+00 prot  8.468E-01 neut  1.532E-01 he4   4.959E-08 temp 1.55E+09 den 7.74E-05 enuc  2.40E+14 ye 8.47E-01 sum  1.49E-14
+     43  time 6.1767E+01 dt(he4  ) 1.7271E+00 prot  8.471E-01 neut  1.529E-01 he4   5.706E-08 temp 1.53E+09 den 7.47E-05 enuc  2.26E+14 ye 8.47E-01 sum  1.50E-14
+     44  time 6.3621E+01 dt(he4  ) 1.8543E+00 prot  8.475E-01 neut  1.525E-01 he4   6.614E-08 temp 1.51E+09 den 7.20E-05 enuc  2.23E+14 ye 8.47E-01 sum  1.49E-14
+     45  time 6.5189E+01 dt(he4  ) 1.5673E+00 prot  8.478E-01 neut  1.522E-01 he4   7.478E-08 temp 1.49E+09 den 6.99E-05 enuc  2.26E+14 ye 8.48E-01 sum  1.49E-14
+     46  time 6.7156E+01 dt(he4  ) 1.9680E+00 prot  8.481E-01 neut  1.519E-01 he4   8.703E-08 temp 1.48E+09 den 6.73E-05 enuc  2.18E+14 ye 8.48E-01 sum  1.48E-14
+     47  time 6.8795E+01 dt(he4  ) 1.6382E+00 prot  8.484E-01 neut  1.516E-01 he4   9.854E-08 temp 1.46E+09 den 6.54E-05 enuc  2.23E+14 ye 8.48E-01 sum  1.44E-14
+     48  time 7.0804E+01 dt(he4  ) 2.0098E+00 prot  8.488E-01 neut  1.512E-01 h2    1.165E-07 temp 1.44E+09 den 6.31E-05 enuc  2.16E+14 ye 8.49E-01 sum  1.44E-14
+     49  time 7.2498E+01 dt(he4  ) 1.6934E+00 prot  8.491E-01 neut  1.509E-01 h2    1.367E-07 temp 1.43E+09 den 6.12E-05 enuc  2.19E+14 ye 8.49E-01 sum  1.44E-14
+     50  time 7.4558E+01 dt(he4  ) 2.0600E+00 prot  8.495E-01 neut  1.505E-01 h2    1.655E-07 temp 1.41E+09 den 5.91E-05 enuc  2.14E+14 ye 8.49E-01 sum  1.45E-14
+     51  time 7.6308E+01 dt(he4  ) 1.7504E+00 prot  8.498E-01 neut  1.502E-01 h2    1.944E-07 temp 1.40E+09 den 5.74E-05 enuc  2.17E+14 ye 8.50E-01 sum  1.47E-14
+     52  time 7.8420E+01 dt(he4  ) 2.1115E+00 prot  8.501E-01 neut  1.499E-01 h2    2.353E-07 temp 1.38E+09 den 5.55E-05 enuc  2.12E+14 ye 8.50E-01 sum  1.47E-14
+     53  time 8.0227E+01 dt(he4  ) 1.8075E+00 prot  8.504E-01 neut  1.495E-01 h2    2.765E-07 temp 1.37E+09 den 5.40E-05 enuc  2.14E+14 ye 8.50E-01 sum  1.48E-14
+     54  time 8.2391E+01 dt(he4  ) 2.1638E+00 prot  8.508E-01 neut  1.492E-01 h2    3.347E-07 temp 1.36E+09 den 5.22E-05 enuc  2.10E+14 ye 8.51E-01 sum  1.45E-14
+     55  time 8.4255E+01 dt(he4  ) 1.8642E+00 prot  8.511E-01 neut  1.489E-01 h2    3.937E-07 temp 1.34E+09 den 5.08E-05 enuc  2.12E+14 ye 8.51E-01 sum  1.43E-14
+     56  time 8.7947E+01 dt(h2   ) 3.6918E+00 prot  8.518E-01 neut  1.482E-01 h2    5.402E-07 temp 1.32E+09 den 4.81E-05 enuc  2.19E+14 ye 8.52E-01 sum  1.35E-14
+     57  time 9.0138E+01 dt(he4  ) 2.1911E+00 prot  8.521E-01 neut  1.479E-01 h2    6.497E-07 temp 1.31E+09 den 4.67E-05 enuc  2.06E+14 ye 8.52E-01 sum  1.34E-14
+     58  time 9.3866E+01 dt(h2   ) 3.7274E+00 prot  8.528E-01 neut  1.472E-01 h2    8.847E-07 temp 1.28E+09 den 4.43E-05 enuc  2.13E+14 ye 8.53E-01 sum  1.40E-14
+     59  time 9.6118E+01 dt(he4  ) 2.2521E+00 prot  8.532E-01 neut  1.468E-01 h2    1.063E-06 temp 1.27E+09 den 4.30E-05 enuc  2.04E+14 ye 8.53E-01 sum  1.39E-14
+     60  time 9.9981E+01 dt(h2   ) 3.8632E+00 prot  8.538E-01 neut  1.462E-01 h2    1.450E-06 temp 1.25E+09 den 4.10E-05 enuc  2.10E+14 ye 8.54E-01 sum  1.44E-14
+     61  time 1.0230E+02 dt(he4  ) 2.3182E+00 prot  8.542E-01 neut  1.458E-01 h2    1.741E-06 temp 1.24E+09 den 3.98E-05 enuc  2.02E+14 ye 8.54E-01 sum  1.45E-14
+     62  time 1.0631E+02 dt(h2   ) 4.0106E+00 prot  8.548E-01 neut  1.452E-01 h2    2.380E-06 temp 1.22E+09 den 3.79E-05 enuc  2.08E+14 ye 8.55E-01 sum  1.39E-14
+     63  time 1.0868E+02 dt(he4  ) 2.3708E+00 prot  8.552E-01 neut  1.448E-01 h2    2.855E-06 temp 1.21E+09 den 3.69E-05 enuc  2.01E+14 ye 8.55E-01 sum  1.38E-14
+     64  time 1.1287E+02 dt(h2   ) 4.1898E+00 prot  8.559E-01 neut  1.441E-01 h2    3.920E-06 temp 1.19E+09 den 3.51E-05 enuc  2.06E+14 ye 8.56E-01 sum  1.38E-14
+     65  time 1.1528E+02 dt(he4  ) 2.4086E+00 prot  8.563E-01 neut  1.437E-01 h2    4.693E-06 temp 1.18E+09 den 3.42E-05 enuc  1.99E+14 ye 8.56E-01 sum  1.35E-14
+     66  time 1.1792E+02 dt(he4  ) 2.6396E+00 prot  8.567E-01 neut  1.433E-01 h2    5.704E-06 temp 1.17E+09 den 3.32E-05 enuc  1.98E+14 ye 8.57E-01 sum  1.33E-14
+     67  time 1.2009E+02 dt(he4  ) 2.1679E+00 prot  8.571E-01 neut  1.429E-01 h2    6.685E-06 temp 1.16E+09 den 3.25E-05 enuc  2.00E+14 ye 8.57E-01 sum  1.38E-14
+     68  time 1.2827E+02 dt(h3   ) 8.1864E+00 prot  8.584E-01 neut  1.416E-01 h2    1.203E-05 temp 1.12E+09 den 2.98E-05 enuc  2.75E+14 ye 8.58E-01 sum  1.32E-14
+     69  time 1.3654E+02 dt(h2   ) 8.2687E+00 prot  8.596E-01 neut  1.403E-01 h2    2.141E-05 temp 1.09E+09 den 2.75E-05 enuc  2.22E+14 ye 8.60E-01 sum  1.31E-14
+     70  time 1.4074E+02 dt(h2   ) 4.1971E+00 prot  8.603E-01 neut  1.397E-01 h2    2.853E-05 temp 1.08E+09 den 2.64E-05 enuc  2.09E+14 ye 8.60E-01 sum  1.25E-14
+     71  time 1.4400E+02 dt(h2   ) 3.2570E+00 prot  8.608E-01 neut  1.392E-01 h2    3.555E-05 temp 1.07E+09 den 2.57E-05 enuc  2.03E+14 ye 8.61E-01 sum  1.28E-14
+     72  time 1.4834E+02 dt(h2   ) 4.3414E+00 prot  8.614E-01 neut  1.385E-01 h2    4.750E-05 temp 1.06E+09 den 2.47E-05 enuc  2.01E+14 ye 8.61E-01 sum  1.24E-14
+     73  time 1.5204E+02 dt(h3   ) 3.6993E+00 prot  8.620E-01 neut  1.379E-01 h2    6.063E-05 temp 1.05E+09 den 2.39E-05 enuc  2.09E+14 ye 8.62E-01 sum  1.24E-14
+     74  time 1.5843E+02 dt(h2   ) 6.3898E+00 prot  8.629E-01 neut  1.369E-01 h2    9.187E-05 temp 1.03E+09 den 2.26E-05 enuc  2.36E+14 ye 8.63E-01 sum  1.23E-14
+     75  time 1.6244E+02 dt(h2   ) 4.0149E+00 prot  8.635E-01 neut  1.363E-01 h2    1.189E-04 temp 1.02E+09 den 2.19E-05 enuc  2.46E+14 ye 8.64E-01 sum  1.24E-14
+     76  time 1.6722E+02 dt(h2   ) 4.7763E+00 prot  8.642E-01 neut  1.355E-01 h2    1.609E-04 temp 1.00E+09 den 2.11E-05 enuc  2.76E+14 ye 8.64E-01 sum  1.23E-14
+     77  time 1.7115E+02 dt(h3   ) 3.9308E+00 prot  8.647E-01 neut  1.349E-01 h2    2.058E-04 temp 9.92E+08 den 2.04E-05 enuc  3.22E+14 ye 8.65E-01 sum  1.18E-14
+     78  time 1.7601E+02 dt(h2   ) 4.8666E+00 prot  8.654E-01 neut  1.340E-01 he4   3.101E-04 temp 9.80E+08 den 1.97E-05 enuc  4.12E+14 ye 8.66E-01 sum  1.24E-14
+     79  time 1.7986E+02 dt(h3   ) 3.8417E+00 prot  8.658E-01 neut  1.334E-01 he4   4.525E-04 temp 9.70E+08 den 1.91E-05 enuc  5.13E+14 ye 8.66E-01 sum  1.29E-14
+     80  time 1.8437E+02 dt(he3  ) 4.5092E+00 prot  8.663E-01 neut  1.325E-01 he4   7.099E-04 temp 9.60E+08 den 1.85E-05 enuc  7.03E+14 ye 8.67E-01 sum  1.25E-14
+     81  time 1.8787E+02 dt(he3  ) 3.5070E+00 prot  8.666E-01 neut  1.318E-01 he4   1.012E-03 temp 9.52E+08 den 1.80E-05 enuc  9.20E+14 ye 8.67E-01 sum  1.25E-14
+     82  time 1.9202E+02 dt(he3  ) 4.1476E+00 prot  8.669E-01 neut  1.308E-01 he4   1.542E-03 temp 9.42E+08 den 1.75E-05 enuc  1.30E+15 ye 8.68E-01 sum  1.24E-14
+     83  time 1.9524E+02 dt(he3  ) 3.2168E+00 prot  8.669E-01 neut  1.300E-01 he4   2.139E-03 temp 9.35E+08 den 1.71E-05 enuc  1.73E+15 ye 8.68E-01 sum  1.31E-14
+     84  time 1.9930E+02 dt(he3  ) 4.0597E+00 prot  8.669E-01 neut  1.287E-01 he4   3.233E-03 temp 9.27E+08 den 1.67E-05 enuc  2.49E+15 ye 8.69E-01 sum  1.35E-14
+     85  time 2.0239E+02 dt(he3  ) 3.0930E+00 prot  8.666E-01 neut  1.276E-01 he4   4.421E-03 temp 9.20E+08 den 1.63E-05 enuc  3.30E+15 ye 8.69E-01 sum  1.39E-14
+     86  time 2.0446E+02 dt(h3   ) 2.0681E+00 prot  8.663E-01 neut  1.267E-01 he4   5.442E-03 temp 9.16E+08 den 1.61E-05 enuc  3.99E+15 ye 8.70E-01 sum  1.42E-14
+     87  time 2.0827E+02 dt(he3  ) 3.8077E+00 prot  8.654E-01 neut  1.248E-01 he4   7.945E-03 temp 9.09E+08 den 1.57E-05 enuc  5.62E+15 ye 8.70E-01 sum  1.55E-14
+     88  time 2.1048E+02 dt(he3  ) 2.2173E+00 prot  8.646E-01 neut  1.234E-01 he4   9.869E-03 temp 9.04E+08 den 1.55E-05 enuc  6.83E+15 ye 8.71E-01 sum  1.69E-14
+     89  time 2.1433E+02 dt(he3  ) 3.8454E+00 prot  8.627E-01 neut  1.204E-01 he4   1.426E-02 temp 8.97E+08 den 1.51E-05 enuc  9.46E+15 ye 8.71E-01 sum  1.98E-14
+     90  time 2.1670E+02 dt(he3  ) 2.3680E+00 prot  8.612E-01 neut  1.182E-01 he4   1.777E-02 temp 8.92E+08 den 1.49E-05 enuc  1.14E+16 ye 8.71E-01 sum  2.42E-14
+     91  time 2.1848E+02 dt(he3  ) 1.7805E+00 prot  8.597E-01 neut  1.163E-01 he4   2.089E-02 temp 8.89E+08 den 1.47E-05 enuc  1.31E+16 ye 8.72E-01 sum  2.98E-14
+     92  time 2.2435E+02 dt(he3  ) 5.8765E+00 prot  8.532E-01 neut  1.083E-01 he4   3.457E-02 temp 8.78E+08 den 1.42E-05 enuc  1.95E+16 ye 8.72E-01 sum  5.92E-14
+     93  time 2.3490E+02 dt(he3  ) 1.0545E+01 prot  8.344E-01 neut  8.718E-02 he4   7.334E-02 temp 8.60E+08 den 1.33E-05 enuc  3.06E+16 ye 8.74E-01 sum  2.13E-13
+     94  time 2.4507E+02 dt(he3  ) 1.0171E+01 prot  8.107E-01 he4   1.219E-01 neut  6.183E-02 temp 8.43E+08 den 1.25E-05 enuc  3.32E+16 ye 8.74E-01 sum  9.20E-13
+     95  time 2.4872E+02 dt(he3  ) 3.6515E+00 prot  8.023E-01 he4   1.392E-01 neut  5.294E-02 temp 8.37E+08 den 1.23E-05 enuc  3.17E+16 ye 8.75E-01 sum  1.46E-12
+     96  time 2.5245E+02 dt(h3   ) 3.7290E+00 prot  7.942E-01 he4   1.559E-01 neut  4.448E-02 temp 8.32E+08 den 1.20E-05 enuc  2.92E+16 ye 8.75E-01 sum  2.10E-12
+     97  time 2.5770E+02 dt(h3   ) 5.2530E+00 prot  7.841E-01 he4   1.768E-01 neut  3.398E-02 temp 8.24E+08 den 1.17E-05 enuc  2.48E+16 ye 8.75E-01 sum  3.26E-12
+     98  time 2.6271E+02 dt(he3  ) 5.0054E+00 prot  7.762E-01 he4   1.934E-01 neut  2.570E-02 temp 8.16E+08 den 1.14E-05 enuc  2.04E+16 ye 8.75E-01 sum  4.34E-12
+     99  time 2.6670E+02 dt(he3  ) 3.9966E+00 prot  7.710E-01 he4   2.043E-01 neut  2.030E-02 temp 8.10E+08 den 1.11E-05 enuc  1.70E+16 ye 8.75E-01 sum  5.19E-12
+    100  time 2.6990E+02 dt(he3  ) 3.1954E+00 prot  7.675E-01 he4   2.117E-01 neut  1.669E-02 temp 8.06E+08 den 1.09E-05 enuc  1.45E+16 ye 8.75E-01 sum  5.86E-12
+    101  time 2.7691E+02 dt(he3  ) 7.0091E+00 prot  7.617E-01 he4   2.242E-01 neut  1.065E-02 temp 7.96E+08 den 1.06E-05 enuc  9.88E+15 ye 8.75E-01 sum  7.14E-12
+    102  time 2.8089E+02 dt(he3  ) 3.9827E+00 prot  7.593E-01 he4   2.294E-01 neut  8.182E-03 temp 7.91E+08 den 1.03E-05 enuc  7.84E+15 ye 8.76E-01 sum  7.81E-12
+    103  time 2.8405E+02 dt(he3  ) 3.1616E+00 prot  7.578E-01 he4   2.327E-01 neut  6.611E-03 temp 7.87E+08 den 1.02E-05 enuc  6.48E+15 ye 8.76E-01 sum  8.30E-12
+    104  time 2.9128E+02 dt(h3   ) 7.2319E+00 prot  7.552E-01 he4   2.383E-01 neut  4.024E-03 temp 7.77E+08 den 9.82E-06 enuc  4.13E+15 ye 8.76E-01 sum  9.12E-12
+    105  time 3.0457E+02 dt(he3  ) 1.3283E+01 prot  7.529E-01 he4   2.439E-01 neut  1.592E-03 temp 7.61E+08 den 9.21E-06 enuc  1.77E+15 ye 8.76E-01 sum  1.03E-11
+    106  time 3.1003E+02 dt(he3  ) 5.4605E+00 prot  7.524E-01 he4   2.451E-01 h2    1.360E-03 temp 7.55E+08 den 8.98E-06 enuc  1.25E+15 ye 8.76E-01 sum  1.06E-11
+    107  time 3.1431E+02 dt(he3  ) 4.2784E+00 prot  7.521E-01 he4   2.458E-01 h2    1.207E-03 temp 7.50E+08 den 8.80E-06 enuc  9.50E+14 ye 8.76E-01 sum  1.08E-11
+    108  time 3.2359E+02 dt(he3  ) 9.2838E+00 prot  7.517E-01 he4   2.468E-01 h2    9.371E-04 temp 7.39E+08 den 8.44E-06 enuc  5.36E+14 ye 8.76E-01 sum  1.12E-11
+    109  time 3.2952E+02 dt(he3  ) 5.9250E+00 prot  7.516E-01 he4   2.473E-01 h2    8.029E-04 temp 7.33E+08 den 8.22E-06 enuc  3.77E+14 ye 8.76E-01 sum  1.14E-11
+    110  time 3.4203E+02 dt(h3   ) 1.2517E+01 prot  7.515E-01 he4   2.478E-01 h2    5.923E-04 temp 7.20E+08 den 7.79E-06 enuc  1.88E+14 ye 8.76E-01 sum  1.16E-11
+    111  time 3.5218E+02 dt(h3   ) 1.0151E+01 prot  7.514E-01 he4   2.480E-01 h2    4.745E-04 temp 7.10E+08 den 7.46E-06 enuc  1.13E+14 ye 8.76E-01 sum  1.18E-11
+    112  time 3.7244E+02 dt(h3   ) 2.0254E+01 prot  7.514E-01 he4   2.483E-01 h2    3.264E-04 temp 6.91E+08 den 6.87E-06 enuc  4.75E+13 ye 8.76E-01 sum  1.19E-11
+    113  time 4.0709E+02 dt(h3   ) 3.4649E+01 prot  7.513E-01 he4   2.484E-01 h2    2.054E-04 temp 6.62E+08 den 6.03E-06 enuc  1.59E+13 ye 8.76E-01 sum  1.21E-11
+    114  time 4.8056E+02 dt(h3   ) 7.3476E+01 prot  7.513E-01 he4   2.485E-01 h2    1.173E-04 temp 6.10E+08 den 4.71E-06 enuc  3.99E+12 ye 8.76E-01 sum  1.22E-11
+    115  time 5.4477E+02 dt(h3   ) 6.4205E+01 prot  7.513E-01 he4   2.486E-01 h2    8.922E-05 temp 5.73E+08 den 3.90E-06 enuc  1.88E+12 ye 8.76E-01 sum  1.22E-11
+    116  time 6.7441E+02 dt(neut ) 1.2964E+02 prot  7.513E-01 he4   2.486E-01 h2    6.527E-05 temp 5.15E+08 den 2.82E-06 enuc  6.78E+11 ye 8.76E-01 sum  1.22E-11
+    117  time 9.2071E+02 dt(neut ) 2.4630E+02 prot  7.513E-01 he4   2.486E-01 h2    4.985E-05 temp 4.40E+08 den 1.75E-06 enuc  2.05E+11 ye 8.76E-01 sum  1.22E-11
+    118  time 1.3822E+03 dt(neut ) 4.6146E+02 prot  7.513E-01 he4   2.486E-01 h2    4.143E-05 temp 3.59E+08 den 9.26E-07 enuc  5.30E+10 ye 8.76E-01 sum  1.22E-11
+    119  time 2.2001E+03 dt(neut ) 8.1792E+02 prot  7.513E-01 he4   2.486E-01 h2    3.752E-05 temp 2.85E+08 den 4.37E-07 enuc  1.24E+10 ye 8.76E-01 sum  1.22E-11
+    120  time 3.5810E+03 dt(neut ) 1.3809E+03 prot  7.513E-01 he4   2.486E-01 h2    3.590E-05 temp 2.23E+08 den 1.86E-07 enuc  2.71E+09 ye 8.76E-01 sum  1.22E-11
+    121  time 5.9612E+03 dt(neut ) 2.3802E+03 prot  7.513E-01 he4   2.486E-01 h2    3.527E-05 temp 1.73E+08 den 6.17E-08 enuc  4.75E+08 ye 8.76E-01 sum  1.22E-11
+    122  time 1.0375E+04 dt(neut ) 4.4142E+03 prot  7.513E-01 he4   2.486E-01 h2    3.511E-05 temp 1.31E+08 den 6.20E-10 enuc  3.52E+06 ye 8.76E-01 sum  1.22E-11
+    123  time 1.9793E+04 dt(neut ) 9.4180E+03 prot  7.513E-01 he4   2.486E-01 h2    3.511E-05 temp 9.48E+07 den 1.00E-10 enuc  1.57E+05 ye 8.76E-01 sum  5.49E-12
+    124  time 3.6167E+04 dt(den  ) 1.6374E+04 prot  7.513E-01 he4   2.486E-01 h2    3.511E-05 temp 7.01E+07 den 1.00E-10 enuc  6.09E+04 ye 8.76E-01 sum  5.00E-15
+    125  time 8.0224E+04 dt(neut ) 4.4057E+04 prot  7.513E-01 he4   2.486E-01 h2    3.511E-05 temp 4.71E+07 den 1.00E-10 enuc  1.62E+04 ye 8.76E-01 sum  2.33E-12
+    126  time 1.7874E+05 dt(neut ) 9.8513E+04 prot  7.513E-01 he4   2.486E-01 h2    3.511E-05 temp 3.15E+07 den 1.00E-10 enuc  3.85E+03 ye 8.76E-01 sum  2.52E-12
+    127  time 4.1917E+05 dt(temp ) 2.4043E+05 prot  7.513E-01 he4   2.486E-01 h2    3.511E-05 temp 2.06E+07 den 1.00E-10 enuc  6.68E+02 ye 8.76E-01 sum  2.56E-12
+    128  time 1.0000E+06 dt(temp ) 5.8083E+05 prot  7.513E-01 he4   2.486E-01 h2    3.511E-05 temp 1.33E+07 den 1.00E-10 enuc  8.73E+01 ye 8.76E-01 sum  2.56E-12
+  
+ bbang:
+  tin =  1.000000000000E+11 din =  2.098713246783E+01 ein =  9.912034659074E+28
+  tout=  1.333182370698E+07 dout=  9.999994392979E-11 eout=  9.912034659285E+28
+  sum =  2.564E-12 nbad=   32 nok=   95
+  
+ top 16 mass fractions:
+ prot = 7.513E-01 he4  = 2.486E-01 h2   = 3.511E-05 he3  = 2.475E-05 h3   = 1.698E-07
+ be7  = 3.006E-09 li7  = 1.347E-10 c11  = 7.286E-14 li6  = 4.096E-14 c12  = 7.110E-15
+ neut = 2.337E-15 b11  = 1.749E-17 c14  = 9.098E-19 b10  = 1.907E-19 be9  = 9.000E-30
+ b8   = 8.000E-30 
+ prot = 7.513E-01 neut = 2.337E-15 he4  = 2.486E-01 
+  
+ cpu time : 00 hrs  00 min  00 sec  242188 usec
+
+
+
+
+on the screen output above:
+column  1 - number of timesteps taken
+columns 2 and 3   - time in seconds
+columns 4 and 5   - next timestep to take and which isotope is limiting the timestep
+columns 6 to 11   - the top 3 most abundant isotopes by mass fraction
+columns 12 and 13 - temperature in kelvin
+columns 14 and 15 - density in gram per cubic centimeter
+columns 16 and 17 - nuclear energy generation rate in erg/g/s
+columns 18 amd 19 - electron fraction 
+columns 20 and 21 - mass non-conservation, 1 - sum (mass fractions)
+
+
+at the end of the run the initial and final temperatures (tin and tout),
+densities (din and dout) and specific thermal energy (ein and eout in erg/g) are reported,
+followed by a sorted listing of the largest mass fractions.
+
+a number of output files are produced, with the name "foo_" being the default.
+
+foo_0000_z1.dat - is an energetic based file containing the evolution of the 
+temperature (temp), density (den), specific internal energy (ener), energy generation rate (sdot)
+neutrino energy loss rate (sneut), net energy generation rate sdot - sneut (s-snu), electron fraction (ye),
+and mass nonconservation (1-sum).
+ 
+foo_0001_z1.dat - is a thermodynamic based file containing the evolution of the
+position (pos), speed (vel), temperature (temp), density (den), presure (pres), 
+specific internal energy (ener), entropy (entr), and sound speed (cs).
+
+foo_0002_z1.dat and onwards - evolution of the isotopes, 1 isotope per column, 
+twelve isotopes per file.
+
+
