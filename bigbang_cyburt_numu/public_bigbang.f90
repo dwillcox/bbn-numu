@@ -73,14 +73,15 @@
        !linnumulo = 3.9492d-12
        !linnumuhi = 3.9497d-12
 
-       nstep = 10000
+       !nstep = 10000
+       nstep = 1
        step = 0.0d0
        if (nstep .ne. 1) step = (lognumuhi - lognumulo)/float(nstep - 1)
        !if (nstep .ne. 1) step = (linnumuhi-linnumulo)/float(nstep-1)
        do kkk=1,nstep
-        lognumu = lognumulo + step * float(kkk-1)
-        magmomplease = 10.0d0**lognumu
-        !magmomplease = 0.0d0
+        !lognumu = lognumulo + step * float(kkk-1)
+        !magmomplease = 10.0d0**lognumu
+        magmomplease = 0.0d0
         !magmomplease = linnumulo + step*float(kkk-1)        
 
         numustep = kkk
