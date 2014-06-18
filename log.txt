@@ -1,0 +1,63 @@
+Observational abundances are as follows (from Brian Fields' 2013 PDG Review on BBN)
+
+D/H = (2.53 +/- 0.04)e-5
+Y = 0.2465 +/- 0.0097
+Li/H = (1.6 +/- 0.3)e-10
+
+What I get for munu = 1e-15 shows mild disagreement with Y (0.224) and poor agreement with d (3.30e-5).
+
+What I get using bigbang_cyburt_baseline shows better agreement with Y (0.249) and similarly poor agreement with d (3.35e-5).
+
+What I get from bigbang_cococubed_baseline is similar with Y=0.249 and even worse agreement with d=3.54e-5 ... what I'm wondering is if this is an issue with the timesteps taken because on F.Timmes' website, he shows abundance plots that give him abundance values for d and Y in good agreement with observation.
+
+Timmes' p fraction: 0.7514
+Cyburt p fraction: 0.7513
+our p fraction: 0.7565
+
+If I just set mu=0 in our code, I get:
+p = 0.7504
+he4 = 0.2495
+d = 3.36e-5
+which more or less matches Cyburt and Timmes.
+
+The question is then whether this is a problem with looping over the mu values or a numerical issue with nonzero mu?
+
+Check with just setting mu=1e-10
+p = 0.7504
+he4 = 0.2495
+d = 3.409e-5
+This is consistent with deviation from mu=0 results and disagrees with our previous mu=1e-10 calculation indicating a problem with the looping scheme.
+
+Try with mu=1e-8
+p = 0.7329
+he4 = 0.2671
+d = 6.303e-5
+These are also quite inconsistent with our previous looped calculations so there is some problem with that...
+
+So I tried changing from using common blocks to declaring magmomplease and numustep in bbnumu_common.dek and importing that wherever I needed it. What I see in the output file is that at the first step, the abundances are as follows:
+numu = 1e-15
+tdec = 1.0000055
+p = 0.7504
+he4 = 0.2495
+d = 3.398e-5
+This is consistent with the single-point calculation at mu=1e-10...
+
+Consider that just one step advanced from that we have:
+numu = 1.177e-15
+tdec = 1.0000055
+p = 0.7761
+he4 = 0.2239
+d = 3.3022e-5
+which seems like quite a step from numu=1e-15, especially since the next 47 steps have identical abundances. I think this is indicative of a serious problem.
+
+I've switched from using explicit common blocks to including the file bbnumu_common.dek which contains the necessary declarations.
+
+So I've output the value of numu at each mu iteration in the main program and in the gettnudec subroutine which is called by wien2. They are the same throughout the program's execution for e.g. 100 steps. This means that I'm communicating the correct magnetic moment at each step and I should look elsewhere for the problem.
+
+One important diagnostic is that if I start the loop at e.g. numu=1e-15 and the next step is numu', then I obtain different values for the numu' step depending on whether I start the loop at numu=1e-15 or at the original numu'. This makes me think there is a memory persistence problem between loops that is endemic to the program instead of some error in handling the numu communication. 
+
+A sanity check for this is looping a few times with the same value of eta each time in a vanilla version of the program...I do this with vanilla cyburt and the abundances stay constant...now let me check this for the numu loop. And it turns out that when I keep numu constant and loop, the first and second steps vary sharply whereas all following steps have constant abundances. At least this semi-isolated the problem. 
+
+....sighh....
+
+None of this was working and I tried a lot more stuff, so in the end I wrote a python wrapper for public_bigbang which handles the looping correctly!
