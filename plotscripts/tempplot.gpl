@@ -1,0 +1,3 @@
+set term postscript
+set output "numu.ps"
+plot "numu_0004_z1_mus500.dat" u 5:5 w l, "numu_0004_z1_mus500.dat" u 3:5 w l
