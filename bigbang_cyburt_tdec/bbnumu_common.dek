@@ -1,0 +1,7 @@
+! for communicating the neutrino magnetic moment
+! magmomplease	= neutrino magnetic moment (units of bohr magnetons)
+
+	real*8 :: magmomplease
+	common /numucom/ magmomplease
+	save /numucom/
+	

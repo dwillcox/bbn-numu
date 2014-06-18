@@ -3,9 +3,9 @@ double precision :: logmulo,logmuhi,step,mu,tdec
 integer :: nstep,j
 
 logmulo = -20
-logmuhi = -10
+logmuhi = -6
 
-nstep = 100
+nstep = 10000
 
 step = (logmuhi-logmulo)/nstep
 

@@ -481,6 +481,10 @@
       real*8       ::  mshell,mint,sthreshold
       common /netcbb/  mshell,mint,sthreshold
 
+!don: for the neutrino magnetic moment
+      real*8       :: magmomplease
+      common /numucom/ magmomplease
+
 
 
 ! for the ffn weak rates

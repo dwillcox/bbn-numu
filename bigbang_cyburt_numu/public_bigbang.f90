@@ -4,7 +4,7 @@
       include 'timers.dek'
       include 'burn_common.dek'
       include 'network.dek'
-
+      
 
 ! this program exercises the bigbang network
 
@@ -19,21 +19,19 @@
       double precision fac,f1,zeta3,zden,rhocrit,omegab,etalo,etahi,step
       parameter        (zeta3 = 1.20205690315732d0)
 
-! our common block for magnetic moment
-      double precision lognumulo,lognumuhi,lognumu,linnumuhi,linnumulo
-      double precision magmomplease,tdecoup,tnudec
-      integer numustep
-      common /numucom/ magmomplease,numustep
+! numu specifics
+      double precision lognumu,tdecoup
 
-! initialize
+! for bigbang numu
+     open(unit=2,file='bbang_numu.dat',status='old',position='append')
+!     write(2,77) 'nmu','tdc','p','d','he3','he4','li6','li7','heavy'
+77      format(1x,t4,a,t16,a,t28,a,t40,a,t52,a,t64,a,t76,a,t88,a,t100,a)
+
        call init_bigbang
        call read_helm_table
        f1  = 30.0d0 * zeta3/pi**4 * asol/(kerg*avo)
 
 
-! keep coming back to here
-20    continue
-      
       call net_input(time_start,time_end,tin,din,vin,zin,ein,xin)
       dtsav = 0.0d0
 
@@ -42,54 +40,22 @@
       call zsecond(timzer)
 
 
-
 ! a message
         write(6,*)
         write(6,*) 'starting integration'
         write(6,*)
 
-
-
- !for bigbang neutrino magnetic moment
-        open(unit=2,file='bbang_numu.dat',status='unknown')
-        write(6,77) 'nu mu','den','omegab','d','he3','he4','li6','li7','heavy'
-        write(2,77) 'nu mu','tdec','p','d','he3','he4','li6','li7','heavy'
-77 format(1x,t4,a,t16,a,t28,a,t40,a,t52,a,t64,a,t76,a,t88,a,t100,a)
-
-       !etalo  = -10.0
-       !etahi  = -9.0
-       !nstep = 50
-
-       !etalo  = -12.0
-       !etahi  = -6.0
-       
-       ! Use the center of the eta range in Brian Fields' 2013 PDG
-       ! review on BBN. At 95%CL, 5.7 <= log(eta) <= 6.7
-       eta1 = 6.2d-10
-
-       lognumulo = -15.0d0
-       lognumuhi = 0.0d0
-
-       !linnumulo = 3.9492d-12
-       !linnumuhi = 3.9497d-12
-
-       !nstep = 10000
-       nstep = 1
-       step = 0.0d0
-       if (nstep .ne. 1) step = (lognumuhi - lognumulo)/float(nstep - 1)
-       !if (nstep .ne. 1) step = (linnumuhi-linnumulo)/float(nstep-1)
-       do kkk=1,nstep
-        !lognumu = lognumulo + step * float(kkk-1)
+! for bigbang numu
+        open(unit=79,file='numuin.dat',status='unknown')
+        read(79,*) lognumu
         !magmomplease = 10.0d0**lognumu
         magmomplease = 0.0d0
-        !magmomplease = linnumulo + step*float(kkk-1)        
-
-        numustep = kkk
- !set the initial density from the temperature and eta1
+        close(unit=79)
+! set the initial density from the temperature and eta1
         din = f1 * eta1 * tin**3
 
 
- !burn it
+! burn it
 
        call burner(time_start,time_end,dtsav,&
                     tin,din,vin,zin,ein,xin, &
@@ -97,7 +63,7 @@
                     conserv,nok,nbad)
 
 
- !output a summary of the integration
+! output a summary of the integration
 
        call net_summary(time_end,tin,din,ein, &
                         tout,dout,eout,conserv, &
@@ -108,44 +74,26 @@
 ! bigbang only, write the final composition
        if (bbang) then
 
-!the present day density
+! the present day density
         zden  = f1 * eta1 * cmbtemp**3
 
 ! critical density, convert hubble constant to cm
         rhocrit = 3.0d0 * (hubble/(pc*10.0d0))**2 / (8.0d0*pi*g)
 
-! get decoupling temperature
+! tdecoup
         call gettnudec(magmomplease,tdecoup)
 
 ! ratio of baryon to critical
-
         omegab  = zden/rhocrit
-
-        write(6,01) eta1,tdecoup,omegab, &
-                    xout(ih2),xout(ihe3),xout(ihe4), &
-                    xout(ili6),xout(ili7)+xout(ibe7), &
-                    xout(ib11)+xout(ic11)
 
         write(2,01) magmomplease,tdecoup,xout(iprot), &
                     xout(ih2),xout(ihe3),xout(ihe4), &
                     xout(ili6),xout(ili7)+xout(ibe7), &
                     xout(ib11)+xout(ic11)
 
-        write(6,01) eta1,zden,omegab, &
-                    xout(ih2)/xout(iprot),xout(ihe3)/xout(iprot), &
-                    xout(ihe4),(xout(ili7)+xout(ibe7))/xout(iprot)
-        
-!01     format(1x,1p10e12.4)
-01      format(1x,es14.7)
+ 01     format(1x,1p10e12.4)
        end if
 
-
- !end of bigbang neutrino magnetic moment loop
-       end do
-
-
-! back for another input point
-      goto 20
       end
 
 
@@ -340,6 +288,7 @@
       include 'burn_common.dek'
       include 'network.dek'
       include 'vector_eos.dek'
+      
 
 ! this routine sets up the system of ode's for big bang nucleosynthesis.
 !
@@ -954,6 +903,7 @@
       include 'burn_common.dek'
       include 'network.dek'
       include 'vector_eos.dek'
+      
 
 ! this routine sets up the dense bigbang jacobian
 
@@ -2258,6 +2208,7 @@
       include 'burn_common.dek'
       include 'network.dek'
       include 'vector_eos.dek'
+      
 
 ! this routine sets up the sparse bigbang jacobian.
 ! input is tt (irrelevant here) and the abundances y(1).
@@ -6469,7 +6420,8 @@
        write(6,01) '<cr> if ok, enter 0 to enter values, enter 1 to exit program =>'
 
        string = ' '
-       read(5,03) string
+!don: skip this
+!       read(5,03) string
        if (string(1:1) .ne. ' ') then
 
         i = value2(string,err)
@@ -6540,7 +6492,9 @@
 ! remove the initial temperature as a user-input; too many people enter inappropriate values
       else if (bbang) then
        write(6,01) 'give the ending time in seconds (suggest 1e6) =>'
-       read(5,*)  time_end
+!don: set time_end = 1e6
+!       read(5,*)  time_end
+       time_end = 1.0d6
        tin= 1.0d11
 
       else if (.not. (trho_hist .or. pt_hist)) then
@@ -6584,11 +6538,12 @@
 !---------------------------------------------------------------------------
 
 ! get the output root file name
-      write(6,*)  ' '
-      write(6,01) 'give output root name, <cr> for default "foo_"=>'
-      read(5,03) hfile
-      if (hfile(1:2) .eq. '  ')  hfile = 'foo_'
-
+!don: set hfile to 'nmot_'
+!      write(6,*)  ' '
+!      write(6,01) 'give output root name, <cr> for default "foo_"=>'
+!      read(5,03) hfile
+!      if (hfile(1:2) .eq. '  ')  hfile = 'foo_'
+       hfile = 'nmot_'
 
 !---------------------------------------------------------------------------
 
@@ -8356,7 +8311,7 @@
 ! zbar = mean charge
 
 ! output:
-! snu    = total neutrino loss rate in erg/g/sec !that is cm^2/sec not an energy loss rate
+! snu    = total neutrino loss rate in erg/g/sec
 ! dsnudt = derivative of snu with temperature
 ! dsnudd = derivative of snu with density
 ! dsnuda = derivative of snu with abar
@@ -10550,6 +10505,7 @@
       include 'implno.dek'
       include 'const.dek'
       include 'network.dek'
+      
 
 ! this is the function given in
 ! weinberg's "gravitation and cosmology" page 537, equation 15.6.40
@@ -10581,15 +10537,9 @@
 ! tolerance tol, will give at least 9 significant figures of precision
 
       double precision ylo,yhi,tol,con1,con2,con3,fthirds,third
-!      double precision bazinga,Tnewdecoup,firsties,secondies
-!      double precision gfermico,planckiemass,termie1,termie2
-!      double precision magmomplease,sigmasofine
-     
-!      ! get magmomplease
-!      common /numucom/ magmomplease
 
-      double precision wiennutempratio
- 
+      double precision wienntr
+
       parameter        (ylo     = 1.0d-6, &
                         yhi     = 50.0d0, &
                         tol     = 1.0d-10, &
@@ -10618,100 +10568,46 @@
 
 
 ! don't do any integration if x is large enough
-  !    if (x .gt. 50.0) then
-  !     wien2 = 1.0d0 + con1*con2**fthirds
+!      if (x .gt. 50.0) then
+!       wien2 = 1.0d0 + con1*con2**fthirds
 
 ! do the integration
-      !else
+!      else
        xcom = x
-       !planckiemass = 1.0d22
-       !gfermico = 1.0d-11
-       
-       ! magmomplease is obtained from a common block above.
-       ! magmomplease = 1.0d-11
-       
-       !sigmasofine =((1.0/137.0)*(1.0/137.0)*3.14/(6.*0.511*0.511))*(magmomplease**2)       
-       !firsties = (0.5/(planckiemass*gfermico*gfermico))
-       !termie1 =  (1.0/27.0)*((sigmasofine**3)/(gfermico**2))
-       !termie2 = (0.25d0/(planckiemass**2))
-       !secondies = (1.0/(gfermico*gfermico))*sqrt(termie1+termie2)
-       
-       !Tnewdecoup = (((firsties+secondies)**third) + ((firsties-secondies)**third))
-       !bazinga = 0.511/Tnewdecoup
-       
-       
 !       call bb_qromb(func2,ylo,yhi,tol,f2)
        call bb_qgaus(func2,xquad,wquad,nquad,f2)
-       !wien2 = 1.0d0 + con1 * (con2 * wien1(x))**fthirds + con3 * f2
-       !wien2 = 1.0d0 + con1 * (min(1.0d0,(wien1(x)/wien1(bazinga))))**fthirds + con3 * f2
-        wien2 = 1.0d0 + con1 *(wiennutempratio(x))**4.0d0 + con3 * f2
-      !end if
+!       wien2 = 1.0d0 + con1 * (con2 * wien1(x))**fthirds + con3 * f2
+       call getwienntr(x,wienntr)
+       wien2 = 1.0d0 + con1 *(wienntr)**4.0d0 + con3 * f2
+!      end if
 
       return
       end
 
 
-      double precision function wiennutempratio(x)
-       double precision x,wien1
+       subroutine getwienntr(x,mywienntr)
+       include 'implno.dek'
+       include 'network.dek' 
+
+       double precision x,wien1,mywienntr
        double precision bazinga,Tnewdecoup,firsties,secondies
        double precision gfermico,planckiemass,termie1,termie2
-       double precision magmomplease,sigmasofine,third
-       integer numustep
+       double precision sigmasofine,third
        double precision wienfractionmu
-
-       ! get magmomplease
-       common /numucom/ magmomplease,numustep
 
        third = 1.0d0/3.0d0
 
-       !planckiemass = 1.0d22
-       !gfermico = 1.0d-11
-
-       ! magmomplease is obtained from a common block above.
-       ! magmomplease = 1.0d-11
-
-       !sigmasofine=((1.0/137.0)*(1.0/137.0)*3.14/(6.*0.511*0.511))*(magmomplease**2)       
-       !firsties = (0.5/(planckiemass*gfermico*gfermico))
-       !termie1 =  (1.0/27.0)*((sigmasofine**3)/(gfermico**2))
-       !termie2 = (0.25d0/(planckiemass**2))
-       !secondies = (1.0/(gfermico*gfermico))*sqrt(termie1+termie2)
-
-       !Tnewdecoup = (((firsties+secondies)**third) + ((firsties-secondies)**third))
-       !Tnewdecoup = tnudec(magmomplease)
        call gettnudec(magmomplease,Tnewdecoup)
        bazinga = 0.511/Tnewdecoup
        wienfractionmu = wien1(x)/wien1(bazinga)
-       ! Following is the wrong (possibly complex-valued) cubic root computation
-       ! (beware cubic roots of negative numbers esp.)
-       wiennutempratio = min(1.0d0,wienfractionmu**third)
-       ! Following is the correct (real-valued) cubic root computation
-       !wiennutempratio =min(1.0d0,sign(abs(wienfractionmu)**third,wienfractionmu))
+       mywienntr=min(1.0d0,sign(abs(wienfractionmu)**third,wienfractionmu))
       return
       end
-      
-!      double precision function tnudec(magmom)
-!        double precision firsties,secondies
-!        double precision gfermico,planckiemass,termie1,termie2
-!        double precision sigmasofine,basiesp,basiesm
-!
-!        third = 1.0d0/3.0d0
-!
-!        planckiemass = 1.0d22
-!        gfermico = 1.0d-11
-!
-!        sigmasofine=((1.0d0/137.0d0)*(1.0d0/137.0d0)*3.14159d0/(6.0d0*0.511d0*0.511d0))*(magmom**2.0d0)       
-!        firsties = (0.5d0/(planckiemass*gfermico*gfermico))
-!        termie1 =  (1.0d0/27.0d0)*((sigmasofine**3.0d0)/(gfermico**2.0d0))
-!        termie2 = (0.25d0/(planckiemass**2.0d0))
-!        secondies = (1.0d0/(gfermico*gfermico))*sqrt(termie1+termie2)
-!        basiesp = firsties+secondies
-!        basiesm = firsties-secondies
-!        tnudec = (sign((abs(basiesp)**third),basiesp)+sign((abs(basiesm)**third),basiesm))
-!
-!        return
-!      end
 
-subroutine gettnudec(magmom,thistnu)
+        subroutine gettnudec(magmom,thistnu)
+        include 'implno.dek'
+        include 'network.dek'
+        
         double precision firsties,secondies
         double precision gfermico,planckiemass,termie1,termie2
         double precision sigmasofine,basiesp,basiesm,third
@@ -10729,13 +10625,9 @@ subroutine gettnudec(magmom,thistnu)
         secondies = (1.0d0/(gfermico*gfermico))*sqrt(termie1+termie2)
         basiesp = firsties+secondies
         basiesm = firsties-secondies
-        ! Following is the wrong (possibly complex-valued) cubic root
-        thistnu=basiesp**third + basiesm**third
-        ! Following is the correct (real-valued) way to compute fractional powers in fortran
-        ! thistnu=(sign((abs(basiesp)**third),basiesp)+sign((abs(basiesm)**third),basiesm))
-        ! This will give NaN for some values because the ** returns complex
-        !thistnu = basiesp**third + basiesm**third
-
+        ! Following is the correct (real-valued) way to compute
+        ! fractional powers in fortran:
+        thistnu=(sign((abs(basiesp)**third),basiesp)+sign((abs(basiesm)**third),basiesm))
         return
       end
 
@@ -11944,10 +11836,6 @@ subroutine gettnudec(magmom,thistnu)
 ! for nse
       integer          igues
       double precision xmun,xmup,t9,tau_nse,tau_qse,taud
-      double precision nutempratio,wiennutempratio,magmomplease
-      integer numustep
-       
-      common /numucom/ magmomplease,numustep
 
 
 ! popular format statements
@@ -11955,7 +11843,6 @@ subroutine gettnudec(magmom,thistnu)
                     t103,a,t117,a,t131,a,t145,a,t159,a, & 
                     t173,a,t187,a,t201,a,t215,a)
 03    format(a50,i4.4,a2,i8,a)
-12358 format(a50,i4.4,a2,i8,a4,i8,a)
 04    format(1x,i6,1pe20.12,1p15e14.6)
 05    format(1x,i6,1pe20.12,1p12e14.6)
 07    format(1x,'* ',a,5(a,1pe11.3))
@@ -11972,14 +11859,6 @@ subroutine gettnudec(magmom,thistnu)
 ! for every spatial zone
        do k=1,max(1,nzone)
         kk = neqs*(k-1)
-
-! logical unit 13 records the photon and neutrino temperatures
-!        write(string,03) hfile,4,'_z',k,'.dat'
-        write(string,12358) hfile,4,'_z',k,'_mus',numustep,'.dat'
-        call sqeeze(string)
-        open (unit=13, file=string, status='unknown')       
-        write(13,07) 'new run:',' numu=',magmomplease 
-        write(13,01) 'step',' time',' temp',' nutempratio',' nutemp'
 
 ! logical unit 22 records the energetics
         write(string,03) hfile,0,'_z',k,'.dat'
@@ -12054,7 +11933,7 @@ subroutine gettnudec(magmom,thistnu)
 ! close up the files
         close(unit=22)
         close(unit=23)
-        close(unit=13)
+
 
 ! end of spatial loop
        enddo
@@ -12149,11 +12028,6 @@ subroutine gettnudec(magmom,thistnu)
        kk = neqs*(k-1)
 
 ! open the files in append mode 
-
-! time/temperature file
-       write(string,12358) hfile,4,'_z',k,'_mus',numustep,'.dat'
-       call sqeeze(string)
-       open (unit=13, file=string, status='old', position='append')
 
 ! energetics file
        write(string,03) hfile,0,'_z',k,'.dat'
@@ -12250,14 +12124,10 @@ subroutine gettnudec(magmom,thistnu)
        write(23,05) kount,x,posx,velx, &
                    temp_row(1),den_row(1),ptot_row(1), &
                    ener,stot_row(1),cs_row(1)
-       
-       nutempratio = wiennutempratio(me * clight**2 / (kerg*temp_row(1)))
-       write(13,05) kount,x,temp_row(1),nutempratio,temp_row(1)*nutempratio
 
 ! close up the files
        close(unit=22)
        close(unit=23)
-       close(unit=13)
 
 ! end of spatial loop
       end do

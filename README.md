@@ -14,4 +14,6 @@ Specific Directories:
 
 >"bigbang_cyburt_numu" contains the code and results for inclusion of a neutrino magnetic moment.
 
+>"bigbang_cyburt_tdec" contains the code and results for computing all abundances vs. neutrino decoupling temperature. (In progress).
+
 >"testtnudec" contains a standalone computation of the neutrino decoupling temperature vs. magnetic moment and is useful for debugging.
