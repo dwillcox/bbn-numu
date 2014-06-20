@@ -482,8 +482,8 @@
       common /netcbb/  mshell,mint,sthreshold
 
 !don: for the neutrino decoupling temperature
-      real*8       :: tnudec
-      common /numucom/ tnudec
+      real*8       :: magmomplease,tnudec
+      common /numucom/ magmomplease,tnudec
 
 
 

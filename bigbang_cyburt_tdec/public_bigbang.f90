@@ -23,7 +23,7 @@
       double precision tdecoup,logtnudec
 
 ! for bigbang numu
-     open(unit=2,file='bbang_numu.dat',status='old',position='append')
+     open(unit=2,file='bbang_tdec.dat',status='old',position='append')
 !     write(2,77) 'nmu','tdc','p','d','he3','he4','li6','li7','heavy'
 77      format(1x,t4,a,t16,a,t28,a,t40,a,t52,a,t64,a,t76,a,t88,a,t100,a)
 
@@ -6539,12 +6539,12 @@
 !---------------------------------------------------------------------------
 
 ! get the output root file name
-!don: set hfile to 'nmot_'
+!don: set hfile to 'tdecot_'
 !      write(6,*)  ' '
 !      write(6,01) 'give output root name, <cr> for default "foo_"=>'
 !      read(5,03) hfile
 !      if (hfile(1:2) .eq. '  ')  hfile = 'foo_'
-       hfile = 'nmot_'
+       hfile = 'tdecot_'
 
 !---------------------------------------------------------------------------
 
@@ -10607,6 +10607,7 @@
 
         subroutine gettnudec(magmom,thistnu)
         include 'network.dek'
+        double precision :: magmom, thistnu
         thistnu=tnudec
         return
       end
@@ -10617,6 +10618,7 @@
       include 'implno.dek'
       include 'const.dek'
       include 'network.dek'
+      include 'burn_common.dek'
 
 ! this is the derivative with respect to x of the function given in
 ! weinberg's "gravitation and cosmology" page 537, equation 15.6.40
@@ -10657,6 +10659,8 @@
                         fthirds = 4.0d0/3.0d0, &
                         third   = 1.0d0/3.0d0)
 
+! for numu stuff
+      double precision tnudecmev,tnudeckelvin,wien1tnudec
 
 ! for quadrature
       integer          nquad,ifirst
@@ -10688,7 +10692,15 @@
        w1   = wien1(x)
        dw1  = dwien1dx(x)
 !       w2   = 1.0d0 + con1*(con2*w1)**fthirds + con3*f2
-       dwien2dx = fthirds*con1*(con2*w1)**third * con2*dw1 + con3*df2
+!       dwien2dx = fthirds*con1*(con2*w1)**third * con2*dw1 + con3*df2
+       call gettnudec(magmomplease,tnudecmev)
+       tnudeckelvin = tnudecmev*kelvinpermev
+       dwien2dx = con3*df2
+       if (tnudeckelvin .LT. btemp) then
+        wien1tnudec = wien1(memev/tnudecmev)
+        dwien2dx = dwien2dx+fthirds*con1*((w1/wien1tnudec)**third)*dw1/wien1tnudec
+       endif
+
       end if
 
       return

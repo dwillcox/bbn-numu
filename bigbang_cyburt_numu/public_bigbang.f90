@@ -48,8 +48,8 @@
 ! for bigbang numu
         open(unit=79,file='numuin.dat',status='unknown')
         read(79,*) lognumu
-        !magmomplease = 10.0d0**lognumu
-        magmomplease = 0.0d0
+        magmomplease = 10.0d0**lognumu
+        !magmomplease = 0.0d0
         close(unit=79)
 ! set the initial density from the temperature and eta1
         din = f1 * eta1 * tin**3
@@ -10637,6 +10637,7 @@
       include 'implno.dek'
       include 'const.dek'
       include 'network.dek'
+      include 'burn_common.dek'
 
 ! this is the derivative with respect to x of the function given in
 ! weinberg's "gravitation and cosmology" page 537, equation 15.6.40
@@ -10677,6 +10678,9 @@
                         fthirds = 4.0d0/3.0d0, &
                         third   = 1.0d0/3.0d0)
 
+! for numu stuff
+      double precision tnudecmev,tnudeckelvin,wien1tnudec
+
 
 ! for quadrature
       integer          nquad,ifirst
@@ -10708,7 +10712,14 @@
        w1   = wien1(x)
        dw1  = dwien1dx(x)
 !       w2   = 1.0d0 + con1*(con2*w1)**fthirds + con3*f2
-       dwien2dx = fthirds*con1*(con2*w1)**third * con2*dw1 + con3*df2
+!       dwien2dx = fthirds*con1*(con2*w1)**third * con2*dw1 + con3*df2
+       call gettnudec(magmomplease,tnudecmev)
+       tnudeckelvin = tnudecmev*kelvinpermev
+       dwien2dx = con3*df2
+       if (tnudeckelvin .LT. btemp) then
+        wien1tnudec = wien1(memev/tnudecmev)
+        dwien2dx = dwien2dx+fthirds*con1*((w1/wien1tnudec)**third)*dw1/wien1tnudec
+       endif
       end if
 
       return
